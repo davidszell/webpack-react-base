@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const path = require('path');
 
+const apiMock = require('./mockData/apiMock');
+
 let mode = 'development';
 let target = 'web';
 
@@ -14,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
     mode: mode,
-    target: 'browserslist',
+    target: target,
 
     entry: path.resolve(__dirname, 'src', 'app', 'index.js'),
 
@@ -70,7 +72,6 @@ module.exports = {
             'app': path.resolve(__dirname, 'src', 'app'),
             'actions': path.resolve(__dirname, 'src', 'app', 'actions'),
             'components': path.resolve(__dirname, 'src', 'app', 'components'),
-            'reducers': path.resolve(__dirname, 'src', 'app', 'reducers'),
             'images': path.resolve(__dirname, 'src', 'images'),
             'styles': path.resolve(__dirname, 'src', 'styles')
         }
@@ -79,6 +80,7 @@ module.exports = {
     devtool: "source-map",
     devServer: {
         static: path.join(__dirname, 'dist'),
-        hot: true
+        hot: true,
+        proxy: apiMock
     }
 };
